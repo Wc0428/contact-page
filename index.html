@@ -2,34 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Add to Contacts</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact Card</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      margin: 0; padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      padding: 30px 40px;
+      max-width: 400px;
+      width: 90%;
       text-align: center;
-      padding: 40px;
     }
-    .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 15px 25px;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-      display: inline-block;
+    .name {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #333;
     }
-    .note {
-      margin-top: 20px;
-      font-size: 14px;
+    .title {
+      font-size: 1em;
+      font-weight: 500;
       color: #666;
+      margin-bottom: 20px;
+    }
+    .info {
+      font-size: 1em;
+      color: #555;
+      margin: 8px 0;
+    }
+    a.website {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    a.website:hover {
+      text-decoration: underline;
+    }
+    button {
+      margin-top: 25px;
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 14px 30px;
+      font-size: 1.1em;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .confirm-box {
+      display: none;
+      margin-top: 20px;
+      font-size: 1em;
+      color: #222;
+    }
+    .confirm-box button {
+      margin: 10px 10px 0 10px;
+      padding: 10px 25px;
+      font-size: 1em;
+      border-radius: 8px;
+    }
+    .confirm-yes {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .confirm-no {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h2>Add Me to Your Contacts</h2>
-  <p>Tap the button below to download my contact card:</p>
-  <a class="btn" href="https://www.dropbox.com/scl/fi/a7uy7i0u0xhdp4tato6mf/kenny_koh.vcf?rlkey=rqpgrrjs73amz90sfwf4lw60d&st=zbqbv3yb&dl=1">Add to Contacts</a>
-  <p class="note">On Android, if this doesn't open automatically, check your Downloads folder and import via your Contacts app.</p>
+  <div class="card">
+    <div class="name">Ali Wei Chek</div>
+    <div class="title">IT Executive</div>
+    <div class="info">📞 +65 9123 4567</div>
+    <div class="info">🏢 AME Construction Sdn Bhd</div>
+    <div class="info">📍 21 Sungei Kadut Street 2, #07-01, Singapore 729238</div>
+    <div class="info">
+      🌐 <a class="website" href="https://www.ameconstruction.com.my" target="_blank" rel="noopener noreferrer">www.ameconstruction.com.my</a>
+    </div>
+    <button id="addContactBtn">Add to Contacts</button>
+
+    <div class="confirm-box" id="confirmBox">
+      <p>Do you want to download and add this contact?</p>
+      <button class="confirm-yes" id="confirmYesBtn">Yes</button>
+      <button class="confirm-no" id="confirmNoBtn">No</button>
+    </div>
+  </div>
+
+  <script>
+    const addContactBtn = document.getElementById('addContactBtn');
+    const confirmBox = document.getElementById('confirmBox');
+    const confirmYesBtn = document.getElementById('confirmYesBtn');
+    const confirmNoBtn = document.getElementById('confirmNoBtn');
+
+    addContactBtn.addEventListener('click', () => {
+      confirmBox.style.display = 'block';
+      addContactBtn.style.display = 'none';
+    });
+
+    confirmYesBtn.addEventListener('click', () => {
+      // Replace this URL with your actual .vcf Dropbox download link with ?dl=1
+      const vcfUrl = "
+https://www.dropbox.com/scl/fi/a7uy7i0u0xhdp4tato6mf/kenny_koh.vcf?rlkey=rqpgrrjs73amz90sfwf4lw60d&st=zbqbv3yb&dl=1";
+
+      // Open the .vcf file link to trigger download/open contact
+      window.location.href = vcfUrl;
+    });
+
+    confirmNoBtn.addEventListener('click', () => {
+      confirmBox.style.display = 'none';
+      addContactBtn.style.display = 'inline-block';
+    });
+  </script>
 </body>
 </html>
